@@ -1,0 +1,97 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: transparent;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  transition: all 0.5s ease-in-out;
+}
+
+.scrolled {
+  background-color: #2b2b2c;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoLink {
+  line-height: 0;
+}
+
+.logoTitle {
+  font-size: 28px;
+  color: var(--text-color);
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+}
+.firstWord::first-letter {
+  color: var(--primary-color);
+} 
+.secondWord::first-letter {
+  color: var(--secondary-color);
+}
+
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.link {
+  color: var(--link-color);
+  font-size: 17px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.link:hover {
+  color: var(--hover);
+}
+
+.active {
+  color: var(--hover);
+}
+
+.logoImg {
+position: relative;
+}
+
+@media only screen and (max-width: 992px) {
+  .menu {
+    display: none;
+  }
+
+  .btnNavbar {
+    display: none !important;
+  }
+
+  .logoTitle {
+    font-size: 25px;
+  }
+
+  .logoImg {
+    width: 50px;
+    height: 54px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .logoImg {
+    width: 40px;
+    height: 44px;
+  }
+}
