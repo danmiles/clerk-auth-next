@@ -8,7 +8,7 @@
   --primary-color: #19aa06;
   --secondary-color: #1a13f0;
   --link-color: #13a200;
-  --hover-color: #1db8c3;
+  --hover-color: #11ddb1;
   --font-color: #1b1717;
   --text-dark: #1d1d1d;
   --white-color: #ffffff;
@@ -31,11 +31,20 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Navbar link */
+.nav-link {
+  @apply text-[17px] text-gray-300 hover:text-hover font-medium transition-all;
+}
+
+.nav-link__scrolled {
+  @apply text-[17px] text-white hover:text-hover font-medium transition-all;
+}
+
 /* Global class */
 .link {
   @apply text-[17px] text-link-clr hover:text-hover font-medium transition-all;
 }
 
 .btn-main {
-  @apply px-6 py-3 rounded-full text-white bg-prim-clr hover:bg-hover hover:text-font-clr transition-all;
+  @apply px-6 py-2 rounded-full text-white bg-prim-clr hover:bg-hover hover:text-font-clr transition-all;
 }

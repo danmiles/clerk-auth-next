@@ -23,10 +23,10 @@ const Navbar = () => {
       const currentScrollY = window.scrollY;
       setScrollPosition(currentScrollY);
 
-      if (scrollPosition < 50 && goingDown) {
+      if (scrollPosition < 450 && goingDown) {
         setGoingDown(false);
       }
-      if (scrollPosition > 50 && !goingDown) {
+      if (scrollPosition > 450 && !goingDown) {
         setGoingDown(true);
       }
     };
@@ -36,8 +36,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-[0] left-[0] right-[0] bg-slate-100 px-[0] py-[10px] border-b border-gray-100 [transition:all_0.8s_ease-in-out] ${
-        goingDown ? `!bg-slate-600 shadow-md` : ''
+      className={` fixed top-[0] left-[0] right-[0] [transition:all_0.8s_ease-in-out] ${
+        goingDown ? ` h-[60px] bg-slate-800 shadow-md` : 'bg-slate-600 px-[0] h-[70px] border-b border-gray-100 '
       }`}
     >
       <div className="container">
@@ -64,8 +64,8 @@ const Navbar = () => {
               return (
                 <li key={link.id}>
                   <Link
-                    className={`link ${
-                      pathname == link.url ? '!text-hover' : ''
+                    className={`${pathname == link.url ? '!text-hover' : ''} ${
+                      goingDown ? 'nav-link__scrolled' : 'nav-link'
                     }`}
                     href={link.url}
                   >
