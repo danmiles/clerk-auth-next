@@ -30,7 +30,7 @@ const NavbarMobile = () => {
   }, []);
 
   return (
-    <nav className={styles.navbarMobile}>
+    <nav className="relative lg:hidden block z-[999]">
       <div className={styles.menu}>
         <button
           aria-label="Navbar mobile toggle button"

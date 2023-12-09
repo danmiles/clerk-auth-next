@@ -27,7 +27,19 @@ const config: Config = {
       '2xl': '1440px',
       // => @media (min-width: 1440px) { ... }
     },
+    extend: {
+      colors: {
+        'prim-clr': 'var(--primary-color)',
+        'sec-clr': 'var(--secondary-color)',
+        'font-clr': 'var(--font-color)',
+        'link-clr': 'var(--link-color)',
+        hover: 'var(--hover-color)',
+        white: 'var(--white-color)',
+      },
+    },
   },
+  // end theme
+
   plugins: [],
 };
 export default config;

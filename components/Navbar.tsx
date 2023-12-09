@@ -36,34 +36,36 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.navbar} ${goingDown ? `${styles.scrolled}` : ''}`}
+      className={`fixed top-[0] left-[0] right-[0] bg-slate-100 px-[0] py-[10px] border-b border-gray-100 [transition:all_0.8s_ease-in-out] ${
+        goingDown ? `!bg-slate-600 shadow-md` : ''
+      }`}
     >
       <div className="container">
-        <div className={styles.content}>
-          <div className={styles.logo}>
-            <Link className={styles.logoLink} href="/">
+        {/* Content */}
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <Link className="leading-[0]" href="/">
               <Image
-                className={styles.logoImg}
+                className="lg:w-13 lg:h-13 md:w-10 md:h-10 w-8 h-8 "
                 src="/images/logo.svg"
-                width={53}
-                height={57}
+                width={55}
+                height={55}
                 alt="logo"
               />
             </Link>
-            <div className={styles.logoTitle}>
-              <span className={styles.firstWord}>Web</span>
-              <span className={styles.secondWord}>Navigator</span>
+            <div className="lg:text-3xl md:text-2xl text-prim-clr text-xl font-semibold flex gap-[10px]">
+              Clerk
             </div>
           </div>
-
-          <ul className={styles.menu}>
-            {/* Menu links start */}
+          {/* Menu links start */}
+          <ul className="lg:flex hidden gap-5 items-center">
             {navbarLinks.map((link) => {
               return (
                 <li key={link.id}>
                   <Link
-                    className={`${styles.link} ${
-                      pathname == link.url ? `${styles.active}` : ''
+                    className={`link ${
+                      pathname == link.url ? '!text-hover' : ''
                     }`}
                     href={link.url}
                   >
@@ -72,14 +74,15 @@ const Navbar = () => {
                 </li>
               );
             })}
-            {/* Menu links end */}
           </ul>
-          <Link className={`primary-btn ${styles.btnNavbar}`} href="/contact">
+          {/* Menu links end */}
+          <Link className="btn-main lg:block hidden" href="/contact">
             Get A Quote
           </Link>
           {/* Navbar mobile */}
           <NavbarMobile />
         </div>
+        {/* content end */}
       </div>
     </nav>
   );
