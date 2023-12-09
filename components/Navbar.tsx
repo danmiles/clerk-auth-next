@@ -1,49 +1,91 @@
 'use client';
 
 import Link from 'next/link';
-import styles from './Navbar.module.css';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 // Components
 import NavbarMobile from './NavbarMobile';
 
-// Data
-import { navbarLinks } from '@/data/navbarData';
+// Navbar links here
+type NavbarLink = {
+  id: number;
+  title: string;
+  url: string;
+};
+
+const navbarLinks: NavbarLink[] = [
+  {
+    id: 1,
+    title: 'Home',
+    url: '/',
+  },
+  {
+    id: 2,
+    title: 'About',
+    url: '/about',
+  },
+  {
+    id: 3,
+    title: 'Services',
+    url: '/services',
+  },
+  {
+    id: 4,
+    title: 'Portfolio',
+    url: '/portfolio',
+  },
+  {
+    id: 5,
+    title: 'Pricing',
+    url: '/pricing',
+  },
+  {
+    id: 6,
+    title: 'Contact',
+    url: '/contact',
+  },
+];
 
 const Navbar = () => {
+  // Active link for current page
   const pathname = usePathname();
-
+  // Navbar visibility
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [prevScrollPosition, setPrevScrollPosition] = useState(0);
+  const [navbarVisible, setNavbarVisible] = useState(true);
 
-  const [goingDown, setGoingDown] = useState(false);
-
+  // Hide Navbar on scroll down and show on scroll up
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrollPosition(currentScrollY);
 
-      if (scrollPosition < 450 && goingDown) {
-        setGoingDown(false);
+      if (currentScrollY > prevScrollPosition && navbarVisible) {
+        setNavbarVisible(false);
       }
-      if (scrollPosition > 450 && !goingDown) {
-        setGoingDown(true);
+      if (currentScrollY < prevScrollPosition && !navbarVisible) {
+        setNavbarVisible(true);
       }
+      setPrevScrollPosition(currentScrollY);
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [goingDown, scrollPosition]);
+  }, [navbarVisible, prevScrollPosition]);
 
   return (
     <nav
-      className={` fixed top-[0] left-[0] right-[0] [transition:all_0.8s_ease-in-out] ${
-        goingDown ? ` h-[60px] bg-slate-800 shadow-md` : 'bg-slate-600 px-[0] h-[70px] border-b border-gray-100 '
+      className={`fixed top-[0] left-[0] right-[0] flex items-center bg-slate-800 shadow-md [transition:all_0.8s_ease-in-out] h-[70px] border-b border-gray-100 ${
+        navbarVisible
+          ? 'translate-y-0 visible  '
+          : 'translate-y-[-100px] invisible'
       }`}
     >
       <div className="container">
         {/* Content */}
         <div className="flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo start */}
           <div className="flex items-center gap-2">
             <Link className="leading-[0]" href="/">
               <Image
@@ -58,15 +100,16 @@ const Navbar = () => {
               Clerk
             </div>
           </div>
+          {/* Logo end */}
           {/* Menu links start */}
           <ul className="lg:flex hidden gap-5 items-center">
             {navbarLinks.map((link) => {
               return (
                 <li key={link.id}>
                   <Link
-                    className={`${pathname == link.url ? '!text-hover' : ''} ${
-                      goingDown ? 'nav-link__scrolled' : 'nav-link'
-                    }`}
+                    className={`text-[17px] font-medium text-white hover:text-hover transition-all ${
+                      pathname == link.url ? '!text-hover' : ''
+                    } `}
                     href={link.url}
                   >
                     {link.title}

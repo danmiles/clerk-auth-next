@@ -31,15 +31,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Navbar link */
-.nav-link {
-  @apply text-[17px] text-gray-300 hover:text-hover font-medium transition-all;
-}
-
-.nav-link__scrolled {
-  @apply text-[17px] text-white hover:text-hover font-medium transition-all;
-}
-
 /* Global class */
 .link {
   @apply text-[17px] text-link-clr hover:text-hover font-medium transition-all;
