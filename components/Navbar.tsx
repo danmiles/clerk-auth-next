@@ -14,7 +14,7 @@ type NavbarLink = {
   url: string;
 };
 
-const navbarLinks: NavbarLink[] = [
+export const navbarLinks: NavbarLink[] = [
   {
     id: 1,
     title: 'Home',

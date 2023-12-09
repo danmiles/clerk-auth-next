@@ -6,8 +6,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
-// Data
-import { navbarLinks } from '@/data/navbarData';
+// Links import from Navbar.tsx
+import { navbarLinks } from './Navbar';
 
 const NavbarMobile = () => {
   const pathname = usePathname();
