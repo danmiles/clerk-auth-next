@@ -46,8 +46,9 @@ const navbarLinks: NavbarLink[] = [
     url: '/contact',
   },
 ];
+import React from 'react';
 
-const Navbar = () => {
+export default function Navbar() {
   // Active link for current page
   const pathname = usePathname();
   // Navbar visibility
@@ -129,6 +130,4 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}
