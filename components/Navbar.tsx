@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 // Components
 import NavbarMobile from './NavbarMobile';
+// Icons
+import { GoTriangleDown } from "react-icons/go";
 
 // Navbar links here
 type NavbarLink = {
@@ -140,15 +142,16 @@ export default function Navbar() {
                       onMouseLeave={() => setDropdown(false)}
                     >
                       <Link
-                        className={`text-[17px] font-medium text-white hover:text-hover transition-all ${
+                        className={`text-[17px] font-medium text-white hover:text-hover transition-all flex items-center gap-1 ${
                           pathname == link.url ? '!text-hover' : ''
                         } `}
                         href={link.url}
                       >
                         {link.title}
+                        <span><GoTriangleDown/></span>
                       </Link>
                       {dropdown && (
-                        <div className="absolute top-[100%] left-0 bg-slate-800 w-[200px] h-[200px] flex flex-col gap-2 p-5">
+                        <div className="absolute top-[100%] left-0 bg-slate-800 w-[200px] flex flex-col gap-2 p-5">
                           {link.dropdown.map((item) => {
                             return (
                               <Link
@@ -157,6 +160,7 @@ export default function Navbar() {
                                 href={item.url}
                               >
                                 {item.title}
+                                
                               </Link>
                             );
                           })}
