@@ -12,6 +12,7 @@ type NavbarLink = {
   id: number;
   title: string;
   url: string;
+  dropdown?: { id: number; title: string; url: string }[];
 };
 
 export const navbarLinks: NavbarLink[] = [
@@ -29,6 +30,28 @@ export const navbarLinks: NavbarLink[] = [
     id: 3,
     title: 'Services',
     url: '/services',
+    dropdown: [
+      {
+        id: 1,
+        title: 'Web Development',
+        url: '/services/web-development',
+      },
+      {
+        id: 2,
+        title: 'Mobile Development',
+        url: '/services/mobile-development',
+      },
+      {
+        id: 3,
+        title: 'UI/UX Design',
+        url: '/services/ui-ux-design',
+      },
+      {
+        id: 4,
+        title: 'Digital Marketing',
+        url: '/services/digital-marketing',
+      },
+    ],
   },
   {
     id: 4,
@@ -55,6 +78,8 @@ export default function Navbar() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [prevScrollPosition, setPrevScrollPosition] = useState(0);
   const [navbarVisible, setNavbarVisible] = useState(true);
+  // Dropdown menu
+  const [dropdown, setDropdown] = useState(false);
 
   // Hide Navbar on scroll down and show on scroll up
   useEffect(() => {
@@ -104,17 +129,50 @@ export default function Navbar() {
           {/* Logo end */}
           {/* Menu links start */}
           <ul className="lg:flex hidden gap-5 items-center">
+            {/* Menu with dropdowsn */}
             {navbarLinks.map((link) => {
               return (
                 <li key={link.id}>
-                  <Link
-                    className={`text-[17px] font-medium text-white hover:text-hover transition-all ${
-                      pathname == link.url ? '!text-hover' : ''
-                    } `}
-                    href={link.url}
-                  >
-                    {link.title}
-                  </Link>
+                  {link.dropdown ? (
+                    <div
+                      className="relative"
+                      onMouseEnter={() => setDropdown(true)}
+                      onMouseLeave={() => setDropdown(false)}
+                    >
+                      <Link
+                        className={`text-[17px] font-medium text-white hover:text-hover transition-all ${
+                          pathname == link.url ? '!text-hover' : ''
+                        } `}
+                        href={link.url}
+                      >
+                        {link.title}
+                      </Link>
+                      {dropdown && (
+                        <div className="absolute top-[100%] left-0 bg-slate-800 w-[200px] h-[200px] flex flex-col gap-2 p-5">
+                          {link.dropdown.map((item) => {
+                            return (
+                              <Link
+                                key={item.id}
+                                className="text-white hover:text-hover transition-all"
+                                href={item.url}
+                              >
+                                {item.title}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      className={`text-[17px] font-medium text-white hover:text-hover transition-all ${
+                        pathname == link.url ? '!text-hover' : ''
+                      } `}
+                      href={link.url}
+                    >
+                      {link.title}
+                    </Link>
+                  )}
                 </li>
               );
             })}

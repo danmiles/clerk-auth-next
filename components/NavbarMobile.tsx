@@ -31,11 +31,11 @@ const NavbarMobile = () => {
 
   return (
     <nav className="relative lg:hidden block z-[999]">
-      <div className={styles.menu}>
+      <div className="">
         <button
           aria-label="Navbar mobile toggle button"
           onClick={() => setIsOpen(!isOpen)}
-          className={styles.menuBtn}
+          className="flex items-center justify-center p-0 z-20 bg-transparent"
         >
           {isOpen ? (
             <Image
@@ -43,7 +43,7 @@ const NavbarMobile = () => {
               width={40}
               height={40}
               alt="menu"
-              className={styles.menuBtn}
+              className="z-20"
             />
           ) : (
             <Image
@@ -51,22 +51,26 @@ const NavbarMobile = () => {
               width={40}
               height={40}
               alt="menu"
-              className={styles.menuBtn}
+              className="z-20"
             />
           )}
         </button>
       </div>
 
-      <div className={`${styles.menuMobile} ${isOpen ? `${styles.open}` : ''}`}>
-        <ul className={styles.menuList}>
+      <div
+        className={`fixed invisible translate-x-full top-[0] right-[0] z-10 [transition:all_0.3s_ease-in-out] ${
+          isOpen ? '!visible !translate-x-[0]' : ''
+        }`}
+      >
+        <ul className="bg-slate-600 [box-shadow:0_0_10px_rgba(0,_0,_0,_0.2)] w-[300px] h-screen flex gap-[15px] flex-col pt-[50px] pl-[15px] [transition:all_0.5s_ease-in-out]">
           {/* Logo */}
-          <div className={styles.logo}>
+          <div className="flex justify-center">
             <Link href="/">
               <Image
-                className={styles.logoImg}
+                className="lg:w-[55px] lg:h-[55px] w-[45px] h-[45px]"
                 src="/images/logo.svg"
-                width={57}
-                height={61}
+                width={55}
+                height={55}
                 alt="logo"
               />
             </Link>
@@ -76,8 +80,8 @@ const NavbarMobile = () => {
             return (
               <li key={link.id}>
                 <Link
-                  className={`${styles.link} ${
-                    pathname == link.url ? `${styles.active}` : ''
+                  className={`text-[17px] font-medium text-white hover:text-hover transition-all ${
+                    pathname == link.url ? '!text-hover' : ''
                   }`}
                   onClick={() => setIsOpen(!isOpen)}
                   href={link.url}
