@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 // Components
-import NavbarMobile from './NavbarMobile';
+import NavbarMobile from './NavbarDropdownMobile';
 // Icons
 import { GoTriangleDown } from 'react-icons/go';
 
@@ -73,7 +73,7 @@ export const navbarLinks: NavbarLink[] = [
 ];
 import React from 'react';
 
-export default function Navbar() {
+export default function NavbarDropdown() {
   // Active link for current page
   const pathname = usePathname();
   // Navbar visibility
@@ -142,7 +142,7 @@ export default function Navbar() {
                     >
                       <div className="text-[17px] font-medium text-white hover:text-hover transition-all flex items-center gap-1">
                         <span>{link.title}</span>
-                        <span>
+                        <span className='text-[18px]'>
                           <GoTriangleDown />
                         </span>
                       </div>

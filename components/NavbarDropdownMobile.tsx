@@ -1,18 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from './NavbarMobile.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 // Links import from Navbar.tsx
-import { navbarLinks } from './Navbar';
+import { navbarLinks } from './NavbarDropdown';
 
 // Icons
 import { GoTriangleDown } from 'react-icons/go';
 
-const NavbarMobile = () => {
+import React from 'react'
+
+export default function NavbarDropdownMobile() {
   // For active link
   const pathname = usePathname();
 
@@ -91,7 +92,7 @@ const NavbarMobile = () => {
                   >
                     <div className="text-[17px] font-medium text-white hover:text-hover transition-all flex items-center gap-1">
                       <span>{link.title}</span>
-                      <span className={dropdown ? 'rotate-180' : ''}>
+                      <span className={`text-[18px] ${dropdown ? 'rotate-180' : ''}`}>
                         <GoTriangleDown />
                       </span>
                     </div>
@@ -105,6 +106,7 @@ const NavbarMobile = () => {
                                 pathname == link.url ? '!text-hover' : ''
                               } `}
                               href={item.url}
+                              onClick={() => setIsOpen(!isOpen)}
                             >
                               {item.title}
                             </Link>
@@ -133,4 +135,4 @@ const NavbarMobile = () => {
   );
 };
 
-export default NavbarMobile;
+
