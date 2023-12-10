@@ -9,12 +9,17 @@ import { usePathname } from 'next/navigation';
 // Links import from Navbar.tsx
 import { navbarLinks } from './Navbar';
 
+// Icons
+import { GoTriangleDown } from 'react-icons/go';
+
 const NavbarMobile = () => {
+  // For active link
   const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
+  // Dropdown on click
+  const [dropdown, setDropdown] = useState(false);
   // function close menu on press escape key
-
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -43,7 +48,7 @@ const NavbarMobile = () => {
               width={40}
               height={40}
               alt="menu"
-              className="z-20"
+              className="z-20 md:w-[40px] md:h-[40px] w-[35px] h-[35px]"
             />
           ) : (
             <Image
@@ -51,7 +56,7 @@ const NavbarMobile = () => {
               width={40}
               height={40}
               alt="menu"
-              className="z-20"
+              className="z-20 md:w-[40px] md:h-[40px] w-[35px] h-[35px]"
             />
           )}
         </button>
@@ -67,27 +72,58 @@ const NavbarMobile = () => {
           <div className="flex justify-center">
             <Link href="/">
               <Image
-                className="lg:w-[55px] lg:h-[55px] w-[45px] h-[45px]"
+                className="md:w-[50px] md:h-[50px] w-[45px] h-[45px]"
                 src="/images/logo.svg"
-                width={55}
-                height={55}
+                width={50}
+                height={50}
                 alt="logo"
               />
             </Link>
           </div>
           {/* Menu links */}
           {navbarLinks.map((link) => {
-            return (
+            return (          
               <li key={link.id}>
-                <Link
-                  className={`text-[17px] font-medium text-white hover:text-hover transition-all ${
-                    pathname == link.url ? '!text-hover' : ''
-                  }`}
-                  onClick={() => setIsOpen(!isOpen)}
-                  href={link.url}
-                >
-                  {link.title}
-                </Link>
+                {link.dropdown ? (
+                  <div
+                    className="relative"
+                    onClick={() => setDropdown(!dropdown)}
+                  >
+                    <div className="text-[17px] font-medium text-white hover:text-hover transition-all flex items-center gap-1">
+                      <span>{link.title}</span>
+                      <span className={dropdown ? 'rotate-180' : ''}>
+                        <GoTriangleDown />
+                      </span>
+                    </div>
+                    {dropdown && (
+                      <div className=" bg-slate-500 w-[200px] flex flex-col gap-2 p-5">
+                        {link.dropdown.map((item) => {
+                          return (
+                            <Link
+                              key={item.id}
+                              className={`text-[16px] text-white hover:text-hover transition-all ${
+                                pathname == link.url ? '!text-hover' : ''
+                              } `}
+                              href={item.url}
+                            >
+                              {item.title}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    className={`text-[17px] font-medium text-white hover:text-hover transition-all ${
+                      pathname == link.url ? '!text-hover' : ''
+                    } `}
+                    href={link.url}
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    {link.title}
+                  </Link>
+                )}
               </li>
             );
           })}

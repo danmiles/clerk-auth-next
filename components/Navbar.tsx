@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 // Components
 import NavbarMobile from './NavbarMobile';
 // Icons
-import { GoTriangleDown } from "react-icons/go";
+import { GoTriangleDown } from 'react-icons/go';
 
 // Navbar links here
 type NavbarLink = {
@@ -117,7 +117,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <Link className="leading-[0]" href="/">
               <Image
-                className="lg:w-13 lg:h-13 md:w-10 md:h-10 w-8 h-8 "
+                className="lg:w-13 lg:h-13 md:w-10 md:h-10 w-9 h-9 "
                 src="/images/logo.svg"
                 width={55}
                 height={55}
@@ -129,9 +129,8 @@ export default function Navbar() {
             </div>
           </div>
           {/* Logo end */}
-          {/* Menu links start */}
+          {/* Menu with dropdown start */}
           <ul className="lg:flex hidden gap-5 items-center">
-            {/* Menu with dropdowsn */}
             {navbarLinks.map((link) => {
               return (
                 <li key={link.id}>
@@ -141,26 +140,24 @@ export default function Navbar() {
                       onMouseEnter={() => setDropdown(true)}
                       onMouseLeave={() => setDropdown(false)}
                     >
-                      <Link
-                        className={`text-[17px] font-medium text-white hover:text-hover transition-all flex items-center gap-1 ${
-                          pathname == link.url ? '!text-hover' : ''
-                        } `}
-                        href={link.url}
-                      >
-                        {link.title}
-                        <span><GoTriangleDown/></span>
-                      </Link>
+                      <div className="text-[17px] font-medium text-white hover:text-hover transition-all flex items-center gap-1">
+                        <span>{link.title}</span>
+                        <span>
+                          <GoTriangleDown />
+                        </span>
+                      </div>
                       {dropdown && (
                         <div className="absolute top-[100%] left-0 bg-slate-800 w-[200px] flex flex-col gap-2 p-5">
                           {link.dropdown.map((item) => {
                             return (
                               <Link
                                 key={item.id}
-                                className="text-white hover:text-hover transition-all"
+                                className={`text-[16px] text-white hover:text-hover transition-all ${
+                                  pathname == link.url ? '!text-hover' : ''
+                                } `}
                                 href={item.url}
                               >
                                 {item.title}
-                                
                               </Link>
                             );
                           })}
@@ -181,7 +178,8 @@ export default function Navbar() {
               );
             })}
           </ul>
-          {/* Menu links end */}
+          {/* Menu with dropdown end */}
+          {/* Button right */}
           <Link className="btn-main lg:block hidden" href="/contact">
             Get A Quote
           </Link>
