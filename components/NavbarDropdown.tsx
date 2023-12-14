@@ -17,7 +17,7 @@ type NavbarLink = {
   dropdown?: { id: number; title: string; url: string }[];
 };
 
-export const navbarLinks: NavbarLink[] = [
+export const navbarLinksDropdown: NavbarLink[] = [
   {
     id: 1,
     title: 'Home',
@@ -77,7 +77,6 @@ export default function NavbarDropdown() {
   // Active link for current page
   const pathname = usePathname();
   // Navbar visibility
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [prevScrollPosition, setPrevScrollPosition] = useState(0);
   const [navbarVisible, setNavbarVisible] = useState(true);
   // Dropdown menu
@@ -87,7 +86,6 @@ export default function NavbarDropdown() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setScrollPosition(currentScrollY);
 
       if (currentScrollY > prevScrollPosition && navbarVisible) {
         setNavbarVisible(false);
@@ -125,13 +123,13 @@ export default function NavbarDropdown() {
               />
             </Link>
             <div className="lg:text-3xl md:text-2xl text-prim-clr text-xl font-semibold flex gap-[10px]">
-              Clerk
+              Clerk + Next.js 14 
             </div>
           </div>
           {/* Logo end */}
           {/* Menu with dropdown start */}
           <ul className="lg:flex hidden gap-5 items-center">
-            {navbarLinks.map((link) => {
+            {navbarLinksDropdown.map((link) => {
               return (
                 <li key={link.id}>
                   {link.dropdown ? (
@@ -180,8 +178,8 @@ export default function NavbarDropdown() {
           </ul>
           {/* Menu with dropdown end */}
           {/* Button right */}
-          <Link className="btn-main lg:block hidden" href="/contact">
-            Get A Quote
+          <Link className="btn-main lg:block hidden" href="/dashboard">
+            Dashboard
           </Link>
           {/* Navbar mobile */}
           <NavbarMobile />

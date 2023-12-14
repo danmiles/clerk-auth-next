@@ -7,10 +7,21 @@ import NavbarDropdown from '@/components/NavbarDropdown';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Clerk authentication with Next.js',
-  description: 'Clerk authentication with Next.js',
+  title: 'Clerk auth with Next.js 14',
+  description: 'Clerk auth with Next.js 14',
+  openGraph: {
+    title: 'Clerk auth with Next.js 14',
+    description:
+      'Clerk auth with Next.js 14 open graph descriptions for social media',
+    images: [
+      {
+        url: '/images/og-meta-img.jpg',
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
 };
-
 export default function RootLayout({
   children,
 }: {
