@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { UserButton, useUser } from '@clerk/nextjs';
 // Components
 import NavbarMobile from './NavbarDropdownMobile';
 // Icons
@@ -74,6 +75,8 @@ export const navbarLinksDropdown: NavbarLink[] = [
 import React from 'react';
 
 export default function NavbarDropdown() {
+  // Clerk - User
+  const { user, isLoaded } = useUser();
   // Active link for current page
   const pathname = usePathname();
   // Navbar visibility
@@ -123,7 +126,7 @@ export default function NavbarDropdown() {
               />
             </Link>
             <div className="lg:text-3xl md:text-2xl text-prim-clr text-xl font-semibold flex gap-[10px]">
-              Clerk + Next.js 14 
+              Clerk + Next.js 14
             </div>
           </div>
           {/* Logo end */}
@@ -140,7 +143,7 @@ export default function NavbarDropdown() {
                     >
                       <div className="text-[17px] font-medium text-white hover:text-hover transition-all flex items-center gap-1">
                         <span>{link.title}</span>
-                        <span className='text-[18px]'>
+                        <span className="text-[18px]">
                           <GoTriangleDown />
                         </span>
                       </div>
@@ -178,9 +181,14 @@ export default function NavbarDropdown() {
           </ul>
           {/* Menu with dropdown end */}
           {/* Button right */}
-          <Link className="btn-main lg:block hidden" href="/dashboard">
-            Dashboard
-          </Link>
+          {isLoaded && user && (
+            <div className="flex gap-2 items-center">
+              <Link className="btn-main lg:block hidden" href="/dashboard">
+                Dashboard
+              </Link>
+              <UserButton afterSignOutUrl="/" />
+            </div>
+          )}
           {/* Navbar mobile */}
           <NavbarMobile />
         </div>
