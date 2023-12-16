@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.28.1",
+    "@xata.io/cli": "^0.15.2",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",

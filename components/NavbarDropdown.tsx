@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { UserButton, useUser } from '@clerk/nextjs';
+import { UserButton, useUser, SignIn } from '@clerk/nextjs';
 // Components
 import NavbarMobile from './NavbarDropdownMobile';
 // Icons
@@ -180,15 +180,16 @@ export default function NavbarDropdown() {
             })}
           </ul>
           {/* Menu with dropdown end */}
-          {/* Button right */}
-          {isLoaded && user && (
-            <div className="flex gap-2 items-center">
-              <Link className="btn-main lg:block hidden" href="/dashboard">
-                Dashboard
-              </Link>
-              <UserButton afterSignOutUrl="/" />
-            </div>
+          {/* Show button only if not sign in */}
+          { !user && (
+            <Link className="btn-main" href="/dashboard">
+              Dashboard
+            </Link>
           )}
+          {/* Dashboard button */}
+
+          {/* Clerk After sign in */}
+          {isLoaded && user && <UserButton afterSignOutUrl="/" />}
           {/* Navbar mobile */}
           <NavbarMobile />
         </div>
