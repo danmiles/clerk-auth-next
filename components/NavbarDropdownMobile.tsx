@@ -11,7 +11,8 @@ import { navbarLinksDropdown } from './NavbarDropdown';
 // Icons
 import { GoTriangleDown } from 'react-icons/go';
 
-import React from 'react';
+// Clerk auth
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 export default function NavbarDropdownMobile() {
   // For active link
@@ -144,6 +145,20 @@ export default function NavbarDropdownMobile() {
               </li>
             );
           })}
+          <li className="flex justify-center">
+            {/* Dashboard button show only signed out */}
+            <SignedOut>
+              <Link className="btn-main" href="/dashboard">
+                Dashboard
+              </Link>
+            </SignedOut>
+          </li>
+          {/* Clerk After sign in */}
+          <li className="flex justify-center">
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+          </li>
         </ul>
       </div>
     </nav>
